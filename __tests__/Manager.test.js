@@ -1,0 +1,1 @@
+﻿//include employee's properties and methods + officeNumber, getRole()

@@ -1,0 +1,1 @@
+﻿//in addition to employee's properties and methods + github, getGithub(), getRoles()

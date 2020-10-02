@@ -1,0 +1,1 @@
+﻿//in addition to Employees properties and methods + school, getSchool(), getRole()--overridden to return 'Intern'
