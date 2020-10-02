@@ -14,3 +14,20 @@ test('creates an Intern object', () => {
 
 
 
+test('gets data from employee', ()=>{
+
+    const intern=new Intern('');
+    
+    expect (intern.getEmployeeData()).toEqual(expect.any(Array));
+    
+   
+    
+    
+    });
+
+    test('gets interns role',()=>{
+        const intern=new Intern('');
+        
+        expect(intern.getRole()).toEqual(expect.stringContaining(intern.role.toString()));
+        
+        });

@@ -10,3 +10,21 @@ test('creates an engineer object', () => {
     expect(engineer.github).toEqual(expect.any(String));
 
 });  
+
+test('gets data from employee', ()=>{
+
+const engineer=new Engineer('');
+
+expect (engineer.getEmployeeData()).toEqual(expect.any(Array));
+
+
+
+
+});
+
+test('gets engineers role',()=>{
+const engineer=new Engineer('');
+
+expect(engineer.getRole()).toEqual(expect.stringContaining(engineer.role.toString()));
+
+});

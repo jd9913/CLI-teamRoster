@@ -11,3 +11,15 @@ test('creates a Manager object', () => {
     expect(manager.officeNum).toEqual(expect.any(String));
 
 });  
+
+
+test('gets data from employee', ()=>{
+
+    const manager=new Manager('');
+    
+    expect (manager.getEmployeeData()).toEqual(expect.any(Array));
+    
+    manager.employeeData=[];
+    
+    
+    });
