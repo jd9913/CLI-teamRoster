@@ -2,32 +2,28 @@
 
 const Intern=require('../lib/Intern.js');
 
-jest.mock('../lib/Intern.js');
 
 
-test('creates an Intern object', () => {
-    const intern = new Intern('');
 
-    expect(intern.school).toEqual(expect.any(String));
+test('sets school in employee data', () => {
+    const school='someSchool';
+    const intern = new Intern('somename',12345,'someemail@email.com', school);
+
+    expect(intern.school).toBe(school);
 
 });  
 
 
-
-test('gets data from employee', ()=>{
-
-    const intern=new Intern('');
-    
-    expect (intern.getEmployeeData()).toEqual(expect.any(Array));
-    
-   
-    
-    
-    });
-
-    test('gets interns role',()=>{
-        const intern=new Intern('');
+    test('gets interns role =intern',()=>{
+        const role='intern';
+        const intern=new Intern('somename',12345,'someemail@email.com', 'someschool');
         
-        expect(intern.getRole()).toEqual(expect.stringContaining(intern.role.toString()));
+        expect(intern.getRole()).toBe(role);
         
+        });
+
+        test("gets school info from getSchool function",()=>{
+            const school='someschool';
+            const intern=new Intern('somename',12345,'someemail@email.com', school);
+            expect(intern.getSchool()).toBe(school);
         });

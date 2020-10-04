@@ -16,6 +16,7 @@
     "jest": "^26.4.2"
   },
   "dependencies": {
+    "foundation-sites": "^6.6.3",
     "inquirer": "^7.3.3"
   }
 }

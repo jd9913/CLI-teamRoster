@@ -2,24 +2,31 @@
 
 const Manager=require('../lib/Manager.js');
 
-jest.mock('../lib/Manager.js');
+
+test ('sets office number', ()=>{
+    const offNum='123-123-1234';
+    const manager=new Manager('somename', 123456, "someemail@email.com", offNum);
+    expect(manager.officeNum).toEqual(offNum);
+})
+
+test('gets managers role=manager',()=>{
+const role='manager';
+const manager= new Manager('somename', 123456, 'someemail@email.com', "123-123-1234");
+expect(manager.getRole()).toBe(role);
 
 
-test('creates a Manager object', () => {
-    const manager = new Manager('');
+});
 
-    expect(manager.officeNum).toEqual(expect.any(String));
+test ('gets managers office num with getOfficeNum',()=>{
+const offNum='123-123-1234';
+const manager=new Manager('somename', 123456, 'someemail@email.com', offNum);
+expect(manager.getOfficeNum()).toBe(offNum);
 
-});  
+})
 
 
-test('gets data from employee', ()=>{
 
-    const manager=new Manager('');
+
     
-    expect (manager.getEmployeeData()).toEqual(expect.any(Array));
-    
-    manager.employeeData=[];
     
     
-    });

@@ -1,30 +1,29 @@
 ﻿//in addition to employee's properties and methods + github, getGithub(), getRoles()
 
 const Engineer=require('../lib/Engineer.js');
-jest.mock('../lib/Engineer.js');
-
-
-test('creates an engineer object', () => {
-    const engineer = new Engineer('');
-
-    expect(engineer.github).toEqual(expect.any(String));
-
-});  
-
-test('gets data from employee', ()=>{
-
-const engineer=new Engineer('');
-
-expect (engineer.getEmployeeData()).toEqual(expect.any(Array));
 
 
 
+test('set github account',()=>{
+const githubAccount= 'userAccount';
+const engineer=new Engineer('somename', 123456, 'semeemail@email.com', githubAccount);
+expect (engineer.github).toBe(githubAccount);
 
-});
+})
 
 test('gets engineers role',()=>{
-const engineer=new Engineer('');
+const role='engineer';
 
-expect(engineer.getRole()).toEqual(expect.stringContaining(engineer.role.toString()));
+    const engineer=new Engineer('somename',12345,'someemail@email.com','userAccount');
+
+expect(engineer.getRole()).toBe(role);
 
 });
+
+test('gets engineers github account',()=>{
+    const githubAccount='userAccount';
+    const engineer=new Engineer('somename',12345,'someemail@email.com',githubAccount);
+    
+    expect(engineer.getGithub()).toBe(githubAccount);
+    
+    });
