@@ -1,15 +1,13 @@
 
 
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
-<br>
 
-
-:house: Readme generator <br>
+:house: Command Line Team Roster <br>
 ==
 
 Description
 --
->this generates a readme file to place with an app on Github.<br>
+>This project is the completion of an assignment and allows a user to generate a team roster HTML page with a manager, engineers and interns<br>
 
 ### Table of Contents
 [Installation](#install)<br>
@@ -20,25 +18,25 @@ Description
 
 :memo: [Installation Instructions](install)
 ========
->use the command prompt and install node.js and inquirer npm to install
+>use the command line interface to run the project via node.js
 
 :computer: [Usage Information](usage)
 ===
->use this to generate styled readme files
+>video walkthrough: https://drive.google.com/file/d/1tK64egQJkTF-DPW_fniQe21k-KKVfY8R/view
 
 :incoming_envelope: [Contribution Guidelines](contribute)
 ==
->use the issues tabs to add contributions
+>use issues through github repository
 
 :notebook: [Testing instructions](test)
 ==
->install and use, add any issues to issues tab
+>built with node.js so can use the built in inspector
 
 :question: [Questions](quest)
 ==
 >:email:Email: jd9913@gmail.com<br>
 >GitHub Username: jd9913<br>
->:link: Repository Link: https://github.com/jd9913/generate-readme<br>
+>:link: Repository Link: https://github.com/jd9913/CLI-teamRoster<br>
 
 [Licenses](#license)
 ==
@@ -52,5 +50,3 @@ Footer
 Made with love :gift_heart: by jd9913.<br>:copyright: 2020
 
         
-
-
