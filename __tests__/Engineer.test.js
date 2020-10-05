@@ -12,7 +12,7 @@ expect (engineer.github).toBe(githubAccount);
 })
 
 test('gets engineers role',()=>{
-const role='engineer';
+const role='Engineer';
 
     const engineer=new Engineer('somename',12345,'someemail@email.com','userAccount');
 

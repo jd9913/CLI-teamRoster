@@ -1,47 +1,17 @@
 ﻿const inquirer = require("inquirer");
-const Engineer = require("./lib/Engineer");
-const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer.js");
+const Manager = require("./lib/Manager.js");
 const Intern = require("./lib/Intern.js");
 const fs = require('fs');
 
+const outputFile = "./dist/teamProfile.html";
+const render = require('./src/generate-page.js');
 
 let employeeData = [];
 let idCollection = [];
 
-function createEntireTeam() {
 
-    function addEmployee() {
-        console.log('this form will add employees to your team');
-
-        inquirer.prompt([
-            {
-                type: 'list',
-                name: 'addOtherEmp',
-                message: "Which type of employee do you want to add?",
-                choices: [
-                    "Engineer",
-                    "Intern",
-                    "Manager",
-                    "I'm finished adding employees"
-                ]
-            }
-        ]).then(userChoice => {
-            switch (userChoice.addOtherEmp) {
-                case "Engineer":
-                    addEngineer();
-                    break;
-                case "Intern":
-                    addIntern();
-                    break;
-                case "Manager":
-                    addManager();
-                    break;
-                default:
-                    buildTeam();
-            }
-        })
-
-    }
+function teamApp() {
 
     function addManager() {
         console.log("please add a manager");
@@ -49,8 +19,13 @@ function createEntireTeam() {
             {
                 type: 'input',
                 name: 'managerName',
-                message: 'What is the name of the manager?'
-
+                message: 'What is the name of the manager?',
+                validate: response => {
+                    if (response !== "") {
+                        return true;
+                    }
+                    return "Please enter at least one value";
+                }
             },
             {
                 type: 'input',
@@ -91,15 +66,56 @@ function createEntireTeam() {
 
                 type: 'input',
                 name: 'managerOfficeNum',
-                message: "what is the manager's office number?"
+                message: "what is the manager's office number?",
+                validate: response => {
+                    const yes = response.match(/^[1-9]\d*$/
+                    );
+                    if (yes) {
+                        return true;
+                    }
+                    return "please enter a valid phone number";
+                }
             }
 
-        ]).then(responses => {
-            const manager = new Manager(responses.managerName, responses.managerEmail, responses.managerOfficeNum, responses.managerId);
+        ]).then(response => {
+            const manager = new Manager(response.managerName, response.managerEmail, response.managerOfficeNum, response.managerId);
             employeeData.push(manager);
-            idCollection.push(responses.managerId);
+            idCollection.push(response.managerId);
             addEmployee();
-        })
+        });
+    }
+
+    function addEmployee() {
+
+        console.log('this form will add employees to your team');
+
+        inquirer.prompt([
+            {
+                type: 'list',
+                name: 'addEmployee',
+                message: "Which type of employee do you want to add?",
+                choices: [
+                    "Manager",
+                    "Engineer",
+                    "Intern",
+                    "I'm finished adding employees"
+                ]
+            }
+        ]).then(choice => {
+            switch (choice.addEmployee) {
+                case "Engineer":
+                    addEngineer();
+                    break;
+                case "Intern":
+                    addIntern();
+                    break;
+                case "Manager":
+                    addManager();
+                    break;
+                default:
+                    buildTeam();
+            }
+        });
     }
 
     function addEngineer() {
@@ -108,7 +124,13 @@ function createEntireTeam() {
             {
                 type: 'input',
                 name: 'engineerName',
-                message: 'What is the name of the engineer?'
+                message: 'What is the name of the engineer?',
+                validate: response => {
+                    if (response !== "") {
+                        return true;
+                    }
+                    return "please enter a name";
+                }
 
             },
             {
@@ -126,7 +148,7 @@ function createEntireTeam() {
                             return true;
                         }
                     }
-
+                    return "please enter a valid Id number";
                 }
 
             },
@@ -148,21 +170,39 @@ function createEntireTeam() {
             {
                 type: 'input',
                 name: 'engineerGithub',
-                message: "what is the engineer's github user account name?"
+                message: "what is the engineer's github user account name?",
+                validate: response => {
+                    if (response !== "") {
+                        return true;
+                    }
+                    return "please enter a valid account name";
+                }
             },
-            {
+         /*   {                 going to be added later
                 type: 'input',
                 name: "engineerManager",
-                message: "Enter the manager ID this engineer is assigned to"
-            }
+                message: "Enter the manager ID this engineer is assigned to",
+                validate: response => {
+                    const yes = response.match(
+                        /^[1-9]\d*$/
+                    );
+                    if (yes) {
+                        if (idCollection.includes(response)) {
+                            return employeeData.manager.name;
+                        } else {
+                            console.log("please add a manager before adding an engineer")
+                            addManager();
+                        }
+                    }
+                }
+            }*/
 
-        ]).then(responses => {
-            const engineer = new Engineer(responses.engineerName, responses.engineerId, responses.engineerEmail, responses.engineerGithub, responses.engineerManager);
+        ]).then(response => {
+            const engineer = new Engineer(response.engineerName, response.engineerId, response.engineerEmail, response.engineerGithub);
             employeeData.push(engineer);
-            idCollection.push(responses.engineerId);
+            idCollection.push(response.engineerId);
             addEmployee();
         });
-
     }
     function addIntern() {
 
@@ -170,7 +210,13 @@ function createEntireTeam() {
             {
                 type: 'input',
                 name: 'internName',
-                message: 'What is the name of the intern?'
+                message: 'What is the name of the intern?',
+                validate: response => {
+                    if (response !== "") {
+                        return true;
+                    }
+                    return "please enter a valid name"
+                }
 
             },
             {
@@ -188,6 +234,7 @@ function createEntireTeam() {
                             return true;
                         }
                     }
+                    return "please enter a valid Id";
 
                 }
 
@@ -210,26 +257,51 @@ function createEntireTeam() {
             {
                 type: 'input',
                 name: 'internSchool',
-                message: "what is the name of the intern's school?"
+                message: "what is the name of the intern's school?",
+                validate: response => {
+                    if (response !== "") {
+                        return true;
+                    }
+                    return "please enter a valid name";
+                }
             },
-            {
+           /* {
                 type: 'input',
                 name: "internManager",
-                message: "Enter the manager ID this intern is assigned to"
-            }
+                message: "Enter the manager ID this intern is assigned to",
+                validate: response => {
+                    const yes = response.match(
+                        /^[1-9]\d*$/
+                    );
+                    if (yes) {
+                        if (idCollection.includes(response)) {
+                            return employeeData.manager.name;
+                        } else {
+                            console.log("please add a manager before adding an intern")
+                            addManager();
+                        }
+                    }
+                }
+            }*/
 
-        ]).then(responses => {
-            const intern = new Intern(responses.internName, responses.internId, responses.internEmail, responses.internSchool, responses.internManager);
+        ]).then(response => {
+            const intern = new Intern(response.internName, response.internId, response.internEmail, response.internSchool);
             employeeData.push(intern);
-            idCollection.push(responses.internId);
+            idCollection.push(response.internId);
             addEmployee();
+        });
+    }
+
+    function buildTeam() {
+
+        fs.writeFileSync(outputFile, render(employeeData), err => {
+            if (err) throw new Error(err);
+            console.log('file created.  open file in browser to see it');
         });
 
     }
-    function buildTeam() {
-        fs.writeFile(outputPath, render(employeeData), 'utf-8');
-
-    }
+    addManager();
 }
-createEntireTeam();
+teamApp();
+
 

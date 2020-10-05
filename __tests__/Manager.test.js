@@ -10,7 +10,7 @@ test ('sets office number', ()=>{
 })
 
 test('gets managers role=manager',()=>{
-const role='manager';
+const role='Manager';
 const manager= new Manager('somename', 123456, 'someemail@email.com', "123-123-1234");
 expect(manager.getRole()).toBe(role);
 

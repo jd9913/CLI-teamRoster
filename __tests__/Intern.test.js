@@ -15,7 +15,7 @@ test('sets school in employee data', () => {
 
 
     test('gets interns role =intern',()=>{
-        const role='intern';
+        const role='Intern';
         const intern=new Intern('somename',12345,'someemail@email.com', 'someschool');
         
         expect(intern.getRole()).toBe(role);
