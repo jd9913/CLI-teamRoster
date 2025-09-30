@@ -13,10 +13,10 @@
   "author": "jd9913",
   "license": "ISC",
   "devDependencies": {
-    "jest": "^26.4.2"
+    "jest": "^30.2.0"
   },
   "dependencies": {
     "foundation-sites": "^6.6.3",
-    "inquirer": "^7.3.3"
+    "inquirer": "^12.9.6"
   }
 }
